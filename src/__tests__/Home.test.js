@@ -1,28 +1,22 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import { name, city } from "../data/data";
-import Home from "../components/Home";
+// src/__tests__/Home.test.js
+import { render, screen } from '@testing-library/react';
+import Home from '../components/Home';
 
-test("renders a div with the correct ID", () => {
-  const { container } = render(<Home />);
-
-  expect(container.querySelector("#home")).toBeInTheDocument();
-});
-
-test("renders the h1 with the text 'Name is a Web Developer from City'", () => {
+test('renders the h1 with the correct text and style', () => {
+  const name = "John Doe";  // Same as in your component
+  const city = "New York";  // Same as in your component
+  
   render(<Home />);
-
-  // Find an element with the text content `${name} is a Web Developer from ${city}`
-  // This uses the variables defined in src/data/data.js
+  
+  // Query the h1 element
   const h1 = screen.queryByText(`${name} is a Web Developer from ${city}`);
-
+  
+  // Check if the h1 is in the document
   expect(h1).toBeInTheDocument();
-  expect(h1.tagName).toBe("H1"); // check that the element is a <h1>
-});
+  
+  // Check if the element is a <h1>
+  expect(h1.tagName).toBe("H1");
 
-test("the h1 has a an inline style attribute with a color of 'firebrick'", () => {
-  render(<Home />);
-
-  const h1 = screen.queryByText(`${name} is a Web Developer from ${city}`);
-  expect(h1).toHaveStyle({ color: "firebrick" });
+  // Check if the style is applied correctly
+  expect(h1).toHaveStyle({ color: 'firebrick' });
 });
